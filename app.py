@@ -5,7 +5,7 @@ import tempfile
 import subprocess
 import shutil
 import re
-from dotenv import load_dotenv
+
 
 from pydub import AudioSegment
 import yt_dlp
@@ -14,7 +14,7 @@ import google.generativeai as genai
 from google.api_core.client_options import ClientOptions
 
 # Load environment variables (for local testing)
-load_dotenv()
+
 
 # --- Configuration ---
 GEMINI_API_KEY = st.secrets.get("GEMINI_API_KEY") or os.getenv("GEMINI_API_KEY")
