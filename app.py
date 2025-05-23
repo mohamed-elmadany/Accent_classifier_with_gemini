@@ -103,7 +103,7 @@ def analyze_with_gemini_direct_audio(audio_file_path):
         # For gemini-1.5-flash (older versions), genai.Part.from_data directly might be sufficient
         # If using gemini-2.0-flash as you have it, genai.upload_file is the correct way for larger audio.
         file = genai.upload_file(audio_file_path)
-        model = genai.GenerativeModel('gemini-1.5-flash') # Changed to 1.5-flash as 2.0-flash might not be generally available or has different access patterns
+        model = genai.GenerativeModel('gemini-2.0-flash') # Changed to 1.5-flash as 2.0-flash might not be generally available or has different access patterns
 
         prompt=f"""
             Analyze the provided audio. Your response MUST be a JSON object with the following keys:
@@ -185,15 +185,15 @@ def main():
 
     st.title("🗣️ Gemini-Powered Audio Analyzer")
     st.markdown("""
-        Upload an audio/video file or provide a YouTube/Loom URL.
-        The app will convert the audio and then send it directly to **Gemini 1.5 Flash**
+        Upload an audio/video file or provide a mp4/Loom URL.
+        The app will convert the audio and then send it directly to **Gemini 2.0 Flash**
         to infer the speaker's accent and provide a concise summary of the content.
         """)
 
     st.header("1. Enter Audio Source")
     audio_source_option = st.radio(
         "Choose audio source:",
-        ("Upload Audio/Video File", "YouTube/Loom URL"),
+        ("Upload Audio/Video File", "mp4/Loom URL"),
         index=0
     )
 
@@ -223,7 +223,7 @@ def main():
             
         else: # YouTube/Loom URL
             if not video_url:
-                st.error("Please enter a YouTube or Loom URL first before clicking Analyze.")
+                st.error("Please enter a mp4 or Loom URL first before clicking Analyze.")
                 return
             with st.spinner("Downloading audio from URL... This might take a moment."):
                 processed_audio_path = download_and_extract_audio_from_url(video_url)
